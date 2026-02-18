@@ -1,50 +1,52 @@
-using UnityEngine;
-using UnityEngine.XR.Interaction.Toolkit;
+//using UnityEngine;
+//using UnityEngine.XR.Interaction.Toolkit;
 
-public class SnappableObj : MonoBehaviour
-{
-    private XRGrabInteractable xrGrab;
-    public bool isGrabbed = false;
-    public GridManager gridManager;
-    public SnapVisualizer snapVisualizer;
+//public class SnappableObj : MonoBehaviour
+//{
+//    private XRGrabInteractable xrGrab;
+//    public bool isGrabbed = false;
+//    public BreadboardManager breadboardManager;
+//    public SnapVisualizer snapVisualizer;
 
-    private void Awake()
-    {
-        xrGrab = GetComponent<XRGrabInteractable>();
+//    private GridRegion snapRegion = null;
 
-        xrGrab.selectEntered.AddListener(onGrabbed);
-        xrGrab.selectExited.AddListener(onReleased);
-    }
+//    private void Awake()
+//    {
+//        xrGrab = GetComponent<XRGrabInteractable>();
 
-    void onGrabbed(SelectEnterEventArgs args)
-    {
-        isGrabbed = true;
-    }
+//        xrGrab.selectEntered.AddListener(onGrabbed);
+//        xrGrab.selectExited.AddListener(onReleased);
+//    }
 
-    void onReleased(SelectExitEventArgs args)
-    {
-        isGrabbed = false;
-        snapVisualizer.Hide();
+//    void onGrabbed(SelectEnterEventArgs args)
+//    {
+//        isGrabbed = true;
+//    }
 
-        if(gridManager.TryGetSnapPoint(transform.position, out Vector3 snapPoint))
-        {
-            transform.position = snapPoint;
-            xrGrab.enabled = false;
-        }
-    }
+//    void onReleased(SelectExitEventArgs args)
+//    {
+//        isGrabbed = false;
+//        snapVisualizer.Hide();
+
+//        if(gridManager.TryGetSnapPoint(transform.position, out Vector3 snapPoint))
+//        {
+//            transform.position = snapPoint;
+//            xrGrab.enabled = false;
+//        }
+//    }
 
 
-    private void Update()
-    {
-        if (!isGrabbed) return;
+//    private void Update()
+//    {
+//        if (!isGrabbed) return;
 
-        if(gridManager.TryGetSnapPoint(transform.position, out Vector3 snapPoint))
-        {
-            snapVisualizer.Show(snapPoint);
-        }
-        else
-        {
-            snapVisualizer.Hide();
-        }
-    }
-}
+//        if(gridManager.TryGetSnapPoint(transform.position, out Vector3 snapPoint))
+//        {
+//            snapVisualizer.Show(snapPoint);
+//        }
+//        else
+//        {
+//            snapVisualizer.Hide();
+//        }
+//    }
+//}
