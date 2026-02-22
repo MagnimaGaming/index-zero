@@ -312,6 +312,68 @@ MonoBehaviour:
   m_DebugDrawJoints: 0
   m_VelocityPrefab: {fileID: 8538602047018081646, guid: 629fd7882ec6bfc499a5fcf20035282b, type: 3}
   m_VelocityType: 2
+--- !u!1 &276793009
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 276793010}
+  - component: {fileID: 276793011}
+  m_Layer: 0
+  m_Name: LegB
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &276793010
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276793009}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -0.296}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2130810742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &276793011
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 276793009}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77fd10b36d4370743bfa62973b69dfbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  legName: LegB
+  isSnapped: 0
+  snappedRegion:
+    regionName: 
+    connectivityType: 0
+    localOrigin: {x: 0, y: 0, z: 0}
+    originMaker: {fileID: 0}
+    rows: 0
+    columns: 0
+    rowSpacing: 0
+    columnSpacing: 0
+    isSegmentedCol: 0
+    segmentedColSize: 5
+    segmentedColGap: 0.0592
+    snapRange: 1
+    localBounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1 &362832920
 GameObject:
   m_ObjectHideFlags: 0
@@ -873,8 +935,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   breadboardRoot: {fileID: 552354698}
   topPowerRail:
-    regionName: 
-    connectivityType: 1
+    regionName: TopPowerRail
+    connectivityType: 0
     localOrigin: {x: 0, y: 0, z: 0}
     originMaker: {fileID: 417726546}
     rows: 2
@@ -884,13 +946,13 @@ MonoBehaviour:
     isSegmentedCol: 1
     segmentedColSize: 5
     segmentedColGap: 0.0592
-    snapRange: 0.05
+    snapRange: 0.1
     localBounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 0, y: 0, z: 0}
   mainAreaUpper:
-    regionName: 
-    connectivityType: 0
+    regionName: MainAreaUpper
+    connectivityType: 1
     localOrigin: {x: 0, y: 0, z: 0}
     originMaker: {fileID: 87298496}
     rows: 5
@@ -899,14 +961,14 @@ MonoBehaviour:
     columnSpacing: 0.0592
     isSegmentedCol: 0
     segmentedColSize: 5
-    segmentedColGap: 0.12
+    segmentedColGap: 0.0592
     snapRange: 0.05
     localBounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 0, y: 0, z: 0}
   mainAreaLower:
-    regionName: 
-    connectivityType: 0
+    regionName: MainAreaLower
+    connectivityType: 1
     localOrigin: {x: 0, y: 0, z: 0}
     originMaker: {fileID: 377452870}
     rows: 5
@@ -915,14 +977,14 @@ MonoBehaviour:
     columnSpacing: 0.0592
     isSegmentedCol: 0
     segmentedColSize: 5
-    segmentedColGap: 0.12
+    segmentedColGap: 0.0592
     snapRange: 0.05
     localBounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 0, y: 0, z: 0}
   bottomPowerRail:
-    regionName: 
-    connectivityType: 1
+    regionName: BottomPowerRail
+    connectivityType: 0
     localOrigin: {x: 0, y: 0, z: 0}
     originMaker: {fileID: 504178948}
     rows: 2
@@ -2738,6 +2800,68 @@ MonoBehaviour:
   m_MotionControllerModeEnded:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1863503943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1863503944}
+  - component: {fileID: 1863503945}
+  m_Layer: 0
+  m_Name: LegA
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1863503944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863503943}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.296}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2130810742}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1863503945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1863503943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77fd10b36d4370743bfa62973b69dfbc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  legName: LegA
+  isSnapped: 0
+  snappedRegion:
+    regionName: 
+    connectivityType: 0
+    localOrigin: {x: 0, y: 0, z: 0}
+    originMaker: {fileID: 0}
+    rows: 0
+    columns: 0
+    rowSpacing: 0
+    columnSpacing: 0
+    isSegmentedCol: 0
+    segmentedColSize: 5
+    segmentedColGap: 0.0592
+    snapRange: 1
+    localBounds:
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
 --- !u!1 &1910708736
 GameObject:
   m_ObjectHideFlags: 0
@@ -3446,7 +3570,7 @@ GameObject:
   - component: {fileID: 2130810743}
   - component: {fileID: 2130810745}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Resister_Test
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3535,7 +3659,9 @@ Transform:
   m_LocalPosition: {x: -1.087, y: 0.83, z: -0.804}
   m_LocalScale: {x: 0.02, y: 0.02, z: 0.02}
   m_ConstrainProportionsScale: 1
-  m_Children: []
+  m_Children:
+  - {fileID: 1863503944}
+  - {fileID: 276793010}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2130810743
@@ -3684,7 +3810,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   m_ThrowVelocityScale: 1.5
   m_ThrowAngularVelocityScale: 1
-  m_ForceGravityOnDetach: 1
+  m_ForceGravityOnDetach: 0
   m_RetainTransformParent: 1
   m_AttachPointCompatibilityMode: 0
   m_StartingSingleGrabTransformers: []
