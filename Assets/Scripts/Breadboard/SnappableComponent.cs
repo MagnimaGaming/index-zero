@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.XR.Interaction.Toolkit;
 
@@ -40,6 +41,15 @@ public class SnappableComponent : MonoBehaviour
     {
         snapVisualizer.Hide();
 
+        StartCoroutine(TrySnapNextFrame());
+    }
+
+
+    private IEnumerator TrySnapNextFrame()
+    {
+
+        yield return null;
+
         if (TrySnapAllLegs())
         {
             isPlaced = true;
@@ -48,13 +58,14 @@ public class SnappableComponent : MonoBehaviour
     }
 
 
+
     public bool TrySnapAllLegs()
     {
         Vector3[] pendingSnapPoints = new Vector3[legs.Length];
         GridRegion[] pendingRegions = new GridRegion[legs.Length];
 
 
-        //checking and storing the data, if even of them can't snap return false
+        //checking and storing the leg data, if even one of them can't snap return false
         for (int i = 0;  i < legs.Length; i++)
         {
             if (!breadboardManager.TryGetSnapPoint(legs[i].transform.position, out pendingSnapPoints[i], out pendingRegions[i]))
