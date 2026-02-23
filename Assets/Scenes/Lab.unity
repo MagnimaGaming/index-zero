@@ -3852,12 +3852,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 2130810738}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a2d8b42c4b8fb4d4f9006e63483163aa, type: 3}
+  m_Script: {fileID: 11500000, guid: cce0ba1d9b1bae148842b6c1a592e9a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isGrabbed: 0
   breadboardManager: {fileID: 552354697}
   snapVisualizer: {fileID: 480142075}
+  legs:
+  - {fileID: 1863503945}
+  - {fileID: 276793011}
+  isPlaced: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

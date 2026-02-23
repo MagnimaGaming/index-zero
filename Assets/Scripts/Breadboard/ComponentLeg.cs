@@ -8,7 +8,7 @@ public class ComponentLeg : MonoBehaviour
     [HideInInspector] public bool isSnapped = false;
     [HideInInspector] public GridRegion snappedRegion = null;
 
-    public void Clear()
+    public void ClearSnap()
     {
         node = null;
         snappedRegion = null;
