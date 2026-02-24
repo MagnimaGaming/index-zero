@@ -15,8 +15,14 @@ public class SnappableComponent : MonoBehaviour
     private XRGrabInteractable xrGrab;
 
 
+    private CircuitSolver solver;
+    private CircuitComponent component; 
+
     private void Awake()
     {
+        solver = FindAnyObjectByType<CircuitSolver>();
+        component = GetComponent<CircuitComponent>();    
+
         xrGrab = GetComponent<XRGrabInteractable>();
 
         xrGrab.selectEntered.AddListener(OnGrabbed);
@@ -33,6 +39,10 @@ public class SnappableComponent : MonoBehaviour
             foreach(ComponentLeg leg in legs)
             {
                 leg.ClearSnap();
+                if(component != null )
+                {
+                    solver.UnRegisterComponent(component);
+                }
             }
         }
     }
@@ -53,6 +63,11 @@ public class SnappableComponent : MonoBehaviour
         if (TrySnapAllLegs())
         {
             isPlaced = true;
+            if(component != null)
+            {
+                solver.RegisterComponent(component);
+            }
+
             xrGrab.enabled = false;
         }
     }
@@ -61,6 +76,10 @@ public class SnappableComponent : MonoBehaviour
 
     public bool TrySnapAllLegs()
     {
+
+
+
+
         Vector3[] pendingSnapPoints = new Vector3[legs.Length];
         GridRegion[] pendingRegions = new GridRegion[legs.Length];
 

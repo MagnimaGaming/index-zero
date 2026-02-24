@@ -1,8 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.XR.Interaction.Toolkit;
 
-public class BatteryComponent : MonoBehaviour
+public class BatteryComponent : CircuitComponent
 {
-    
+    [Header("Switch")]
+    public bool isPowerOn = false;
+    public XRSimpleInteractable simpleInteractable;
+
+    public CircuitSolver solver;
+
+    [Header("Light Visuals")]
+    public Light powerLight;
+    public Color onColor = Color.green;
+    public Color offColor = Color.gray;
+
+
+    private void Start()
+    {
+        solver = FindAnyObjectByType<CircuitSolver>();
+
+        if(simpleInteractable != null)
+        {
+            simpleInteractable.selectEntered.AddListener(OnSwitchFlip);
+        }
+    }
+
+    private void OnSwitchFlip(SelectEnterEventArgs args)
+    {
+        isPowerOn = !isPowerOn;
+        ApplyVisuals();
+
+        if(solver != null)
+        {
+            solver.Solve();
+        }
+        
+    }
+
+    private void ApplyVisuals()
+    {
+        if(powerLight != null)
+        {
+            powerLight.color = isPowerOn ? onColor : offColor;
+            powerLight.intensity = isPowerOn ? 1.5f : 0.2f;
+        }
+    }
+
+    public override void Simulate(CircuitSolver circuitSolver)
+    {
+        //battery can't simulate, it is just a power source
+    }
+
+    public override void ResetState()
+    {
+        isPowerOn = false;
+        ApplyVisuals();
+    }
 }

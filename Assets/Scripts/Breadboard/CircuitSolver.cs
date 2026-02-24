@@ -45,12 +45,38 @@ public class CircuitSolver : MonoBehaviour
         //setting battery
         foreach(CircuitComponent comp in components)
         {
-            //if(comp is BatteryComponent battery)
-            //{
-            //    battery.legs
-            //}
+            if (comp is BatteryComponent battery)
+            {
+                if(battery.legs[0].node != null && battery.legs[1].node != null)
+                {
+                    battery.legs[0].node.voltage = supplyVoltage;
+                    battery.legs[1].node.voltage = 0f;
+                }
+            }
         }
 
+    }
+
+    public void RegisterComponent(CircuitComponent comp)
+    {
+        if (!components.Contains(comp))
+        {
+            components.Add(comp);
+        }
+        Solve();
+    }
+
+    public void UnRegisterComponent(CircuitComponent comp)
+    {
+        components.Remove(comp);
+
+        foreach(ComponentLeg leg in comp.legs)
+        {
+            leg.node = null;
+        }
+
+        comp.ResetState();
+        Solve();
     }
 
 
