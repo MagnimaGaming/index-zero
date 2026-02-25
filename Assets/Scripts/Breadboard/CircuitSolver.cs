@@ -80,7 +80,6 @@ public class CircuitSolver : MonoBehaviour
         Solve();
     }
 
-
     private string GetKeyNode(ComponentLeg leg)
     {
         GridRegion legRegion = leg.snappedRegion;
@@ -112,4 +111,67 @@ public class CircuitSolver : MonoBehaviour
             }
         }
     }
+
+    private void CalculateVoltages()
+    {
+        float totalResistance = 0f;
+        float totalForwardVoltage = 0f;
+        float highVoltage = -1;
+        float lowVoltage = -1;
+        bool batterOn = false;
+
+
+        foreach(CircuitComponent comp  in components)
+        {
+            if(comp is ResisterComponent resister)
+            {
+                totalResistance += resister.resistance;
+            }
+
+            if(comp is LEDComponent led)
+            {
+                totalForwardVoltage += led.forwardVoltage;
+            }
+
+            if (comp is BatteryComponent battery)
+            {
+                if (battery.legs[0].node != null && battery.legs[1].node != null)
+                {
+                    lowVoltage = battery.legs[0].node.voltage;
+                    highVoltage = battery.legs[1].node.voltage;
+                }
+            }
+
+            if (!batterOn) return;
+            if (lowVoltage < 0 && highVoltage < 0) return;
+
+            float availableVoltage = highVoltage - lowVoltage;
+            if (availableVoltage <= 0f) return;
+
+            if(totalResistance <= 0f)
+            {
+                solvedCurrent = 999f;
+                return;
+            }
+
+            float voltageAcrossResister = availableVoltage - totalForwardVoltage;
+            if(voltageAcrossResister <= 0)
+            {
+                solvedCurrent = 0f;
+                return;
+            }
+
+
+            solvedCurrent = voltageAcrossResister/totalResistance;
+
+
+            foreach(var kvp in nodeMap)
+            {
+                if(kvp.Value.voltage == -1f)
+                {
+                    kvp.Value.voltage = lowVoltage + totalForwardVoltage;
+                }
+            }
+        }
+    }   
 }
