@@ -6,7 +6,7 @@ public class SnappableComponent : MonoBehaviour
 {
     [Header("References")]
     public BreadboardManager breadboardManager;
-    public SnapVisualizer snapVisualizer;
+    public SnapVisualizer[] snapVisualizers;
 
     [Header("Legs")]
     public ComponentLeg[] legs;
@@ -50,7 +50,10 @@ public class SnappableComponent : MonoBehaviour
 
     private void OnReleased(SelectExitEventArgs args)
     {
-        snapVisualizer.Hide();
+        for(int i = 0; i < legs.Length; i++)
+        {
+            snapVisualizers[i].Hide();
+        }
 
         StartCoroutine(TrySnapNextFrame());
     }
@@ -60,6 +63,7 @@ public class SnappableComponent : MonoBehaviour
     {
 
         yield return null;
+
 
         if (TrySnapAllLegs())
         {
@@ -116,15 +120,18 @@ public class SnappableComponent : MonoBehaviour
         if (isPlaced) return;
         if (!xrGrab.isSelected) return;
         
+        for(int i = 0; i <legs.Length; i++)
+        {
+            if (breadboardManager.TryGetSnapPoint(legs[i].transform.position, out Vector3 snapPoint, out _))
+            {
+                snapVisualizers[i].Show(snapPoint);
+            }
+            else
+            {
+                snapVisualizers[i].Hide();
+            }
+        }
 
-        if(breadboardManager.TryGetSnapPoint(transform.position, out Vector3 snapPoint, out _))
-        {
-            snapVisualizer.Show(snapPoint);
-        }
-        else
-        {
-            snapVisualizer.Hide();
-        }
     }
 
 
