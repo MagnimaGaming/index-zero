@@ -25,9 +25,9 @@ public class CircuitSolver : MonoBehaviour
 
 
         //creating nodeMap
-        foreach(CircuitComponent comp in components)
+        foreach (CircuitComponent comp in components)
         {
-            foreach(ComponentLeg leg in comp.legs)
+            foreach (ComponentLeg leg in comp.legs)
             {
                 if (!leg.isSnapped) return;
                 string key = GetKeyNode(leg);
@@ -39,12 +39,14 @@ public class CircuitSolver : MonoBehaviour
             }
         }
 
+        MergeWireNodes();
+
         //setting battery
-        foreach(CircuitComponent comp in components)
+        foreach (CircuitComponent comp in components)
         {
             if (comp is BatteryComponent battery)
             {
-                if(battery.legs[0].node != null && battery.legs[1].node != null)
+                if (battery.legs[0].node != null && battery.legs[1].node != null)
                 {
                     battery.legs[0].node.voltage = supplyVoltage;
                     battery.legs[1].node.voltage = 0f;
@@ -54,7 +56,7 @@ public class CircuitSolver : MonoBehaviour
 
         CalculateVoltages();
 
-        foreach(CircuitComponent comp in components)
+        foreach (CircuitComponent comp in components)
         {
             comp.Simulate(this);
         }
@@ -74,7 +76,7 @@ public class CircuitSolver : MonoBehaviour
     {
         components.Remove(comp);
 
-        foreach(ComponentLeg leg in comp.legs)
+        foreach (ComponentLeg leg in comp.legs)
         {
             leg.node = null;
         }
@@ -90,7 +92,7 @@ public class CircuitSolver : MonoBehaviour
         Vector3 legLocalPos = breadboardManager.breadboardRoot.InverseTransformPoint(leg.transform.position);
         Vector3 legPosRelToRegion = legLocalPos - legRegion.localOrigin;
 
-        if(legRegion.connectivityType == GridRegion.ConnectivityType.rowsConnected)
+        if (legRegion.connectivityType == GridRegion.ConnectivityType.rowsConnected)
         {
             int row = Mathf.RoundToInt(legPosRelToRegion.x / legRegion.rowSpacing);
             row = Mathf.Clamp(row, 0, legRegion.rows - 1);
@@ -100,7 +102,7 @@ public class CircuitSolver : MonoBehaviour
         else
         {
             int col = Mathf.RoundToInt(legPosRelToRegion.z / legRegion.columnSpacing);
-            col = Mathf.Clamp(col, 0,legRegion.columns - 1);
+            col = Mathf.Clamp(col, 0, legRegion.columns - 1);
 
 
             if (legRegion.isSegmentedCol)
@@ -156,30 +158,78 @@ public class CircuitSolver : MonoBehaviour
         float availableVoltage = highVoltage - lowVoltage;
         if (availableVoltage <= 0f) return;
 
-        if(totalResistance <= 0f)
+        if (totalResistance <= 0f)
         {
             solvedCurrent = 999f;
             return;
         }
 
         float voltageAcrossResister = availableVoltage - totalForwardVoltage;
-        if(voltageAcrossResister <= 0)
+        if (voltageAcrossResister <= 0)
         {
             solvedCurrent = 0f;
             return;
         }
 
 
-        solvedCurrent = voltageAcrossResister/totalResistance;
+        solvedCurrent = voltageAcrossResister / totalResistance;
 
 
-        foreach(var kvp in nodeMap)
+        foreach (var kvp in nodeMap)
         {
-            if(kvp.Value.voltage == -1f)
+            if (kvp.Value.voltage == -1f)
             {
                 kvp.Value.voltage = lowVoltage + totalForwardVoltage;
             }
         }
-     
-    }   
+
+    }
+
+    private void MergeWireNodes()
+    {
+        foreach (CircuitComponent comp in components)
+        {
+            if (comp is JumperWireComponent wireComponent)
+            {
+                if (wireComponent.legs[0].node == null) return;
+                if (wireComponent.legs[1].node == null) return;
+
+                Node nodeA = wireComponent.legs[0].node;
+                Node nodeB = wireComponent.legs[1].node;
+
+                if (nodeA == null || nodeA == null) return;
+
+                if (nodeA == nodeB) return;
+
+                MergeIntoOneNode(nodeA, nodeB);
+            }
+        }
+    }
+
+
+    private void MergeIntoOneNode(Node keepNode, Node removeNode)
+    {
+        if (keepNode == null || removeNode == null) return;
+
+        foreach(CircuitComponent comp in components)
+        {
+            foreach(ComponentLeg leg in comp.legs)
+            {
+                if (leg.node == removeNode)
+                {
+                    leg.node = keepNode;
+                }
+            }
+        }
+
+        //update nodeMap
+
+        foreach(var key in new List<string>(nodeMap.Keys))
+        {
+            if (nodeMap[key] == removeNode)
+            {
+                nodeMap[key] = keepNode;
+            }
+        }
+    }
 }

@@ -998,7 +998,7 @@ MonoBehaviour:
     localBounds:
       m_Center: {x: 0, y: 0, z: 0}
       m_Extent: {x: 0, y: 0, z: 0}
-  showGizmos: 1
+  showGizmos: 0
 --- !u!4 &552354698 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: d0ca25dee540f1045bbca30a50b1b9b0, type: 3}

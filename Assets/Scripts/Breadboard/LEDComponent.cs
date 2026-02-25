@@ -23,7 +23,7 @@ public class LEDComponent : CircuitComponent
     public enum LEDState {Off, Glowing, Blown};
     public LEDState currentState = LEDState.Off;
 
-    private static int EmissionColor = Shader.PropertyToID("_EmissionColor");
+    private static readonly int EmissionColor = Shader.PropertyToID("_EmissionColor");
 
 
     private void Start()
