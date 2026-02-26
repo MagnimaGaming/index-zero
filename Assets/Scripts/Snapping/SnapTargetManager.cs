@@ -25,4 +25,5 @@ public class SnapTargetManager : MonoBehaviour
         snapTarget = null;
         return false;
     }
+
 }

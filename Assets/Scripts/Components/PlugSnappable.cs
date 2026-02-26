@@ -85,7 +85,7 @@ public class PlugSnappable : MonoBehaviour
         {
             snapVisualizer.Show(snapPoint);
         }
-        else if (snapTargetManager.TryGetSnapPoint(leg.transform.position, out Vector3 snapPoint2, out _))
+        else if(snapTargetManager.TryGetSnapPoint(leg.transform.position, out Vector3 snapPoint2, out _))
         {
             snapVisualizer.Show(snapPoint2);
         }
