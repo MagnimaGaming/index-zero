@@ -7,11 +7,13 @@ public class ComponentLeg : MonoBehaviour
     [HideInInspector] public Node node = null;
     [HideInInspector] public bool isSnapped = false;
     [HideInInspector] public GridRegion snappedRegion = null;
+    [HideInInspector] public SnapTarget snapTarget = null;
 
     public void ClearSnap()
     {
         node = null;
         snappedRegion = null;
+        snapTarget = null;
         isSnapped = false;
     }
 }

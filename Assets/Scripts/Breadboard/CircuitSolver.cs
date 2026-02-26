@@ -29,7 +29,8 @@ public class CircuitSolver : MonoBehaviour
         {
             foreach (ComponentLeg leg in comp.legs)
             {
-                if (!leg.isSnapped) return;
+                if (!leg.isSnapped) continue;
+
                 string key = GetKeyNode(leg);
                 if (!nodeMap.ContainsKey(key))
                 {
@@ -87,6 +88,12 @@ public class CircuitSolver : MonoBehaviour
 
     private string GetKeyNode(ComponentLeg leg)
     {
+        if (leg.snapTarget != null)
+        {
+            return leg.snapTarget.nodeKey;
+        }
+
+
         GridRegion legRegion = leg.snappedRegion;
 
         Vector3 legLocalPos = breadboardManager.breadboardRoot.InverseTransformPoint(leg.transform.position);
@@ -140,15 +147,11 @@ public class CircuitSolver : MonoBehaviour
 
             if (comp is BatteryComponent battery)
             {
-                if (battery.legs[0].node != null)
-                {
-                    highVoltage = battery.legs[0].node.voltage;
-                }
+                if (!battery.isPowerOn) return;
 
-                if (battery.legs[1].node != null)
-                {
-                    lowVoltage = battery.legs[1].node.voltage;
-                }
+                highVoltage = battery.legs[0].node.voltage;
+                lowVoltage = battery.legs[1].node.voltage;
+                batterOn = true;
             }
         }
 
@@ -197,8 +200,7 @@ public class CircuitSolver : MonoBehaviour
                 Node nodeA = wireComponent.legs[0].node;
                 Node nodeB = wireComponent.legs[1].node;
 
-                if (nodeA == null || nodeA == null) return;
-
+                if (nodeA == null || nodeB == null) return;
                 if (nodeA == nodeB) return;
 
                 MergeIntoOneNode(nodeA, nodeB);
