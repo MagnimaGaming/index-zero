@@ -70,6 +70,7 @@ public class PlugSnappable : MonoBehaviour
             leg.snappedRegion = null;
             leg.snapTarget = snapTarget;
             leg.isSnapped = true;
+            isSnapped = true;
             xrGrab.interactionLayers = placedLayerMask;
 
             parentWire.OnPlugSnapped();

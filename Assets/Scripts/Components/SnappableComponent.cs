@@ -81,6 +81,12 @@ public class SnappableComponent : MonoBehaviour
             if (component != null)
             {
                 solver.RegisterComponent(component);
+
+                if(component is BatteryComponent battery)
+                {
+                    battery.OnPlaced();
+                    solver.Solve();
+                }
             }
 
             xrGrab.enabled = false;

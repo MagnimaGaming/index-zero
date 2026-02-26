@@ -9,6 +9,9 @@ public class JumperWireComponent : CircuitComponent
     private void Awake()
     {
         solver = FindAnyObjectByType<CircuitSolver>();
+
+        if(plugA != null) legs[0] = plugA.leg;
+        if(plugB != null) legs[1] = plugB.leg;
     }
 
     public override void Simulate(CircuitSolver solver)

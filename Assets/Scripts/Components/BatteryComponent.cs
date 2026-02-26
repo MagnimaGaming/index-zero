@@ -63,4 +63,10 @@ public class BatteryComponent : CircuitComponent
         isPowerOn = false;
         ApplyVisuals();
     }
+
+    public void OnPlaced()
+    {
+        isPowerOn = true;
+        ApplyVisuals();
+    }
 }

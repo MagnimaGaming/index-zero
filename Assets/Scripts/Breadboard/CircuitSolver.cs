@@ -300,8 +300,8 @@ public class CircuitSolver : MonoBehaviour
                 Node nodeA = wireComponent.legs[0].node;
                 Node nodeB = wireComponent.legs[1].node;
 
-                if (nodeA == null || nodeB == null) return;
-                if (nodeA == nodeB) return;
+                if (nodeA == null || nodeB == null) continue;
+                if (nodeA == nodeB) continue;
 
                 MergeIntoOneNode(nodeA, nodeB);
             }
