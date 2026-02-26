@@ -119,16 +119,27 @@ public class SnappableComponent : MonoBehaviour
     {
         if (isPlaced) return;
         if (!xrGrab.isSelected) return;
-        
+
+        int snapCount = 0;
+        Vector3[] snapPoints = new Vector3[2];
         for(int i = 0; i <legs.Length; i++)
         {
             if (breadboardManager.TryGetSnapPoint(legs[i].transform.position, out Vector3 snapPoint, out _))
             {
-                snapVisualizers[i].Show(snapPoint);
+                snapCount++;
+                snapPoints[i] = snapPoint;
             }
             else
             {
                 snapVisualizers[i].Hide();
+            }
+        }
+
+        if(snapCount >= 2)
+        {
+            for(int i = 0; i < legs.Length; i++)
+            {
+                snapVisualizers[i].Show(snapPoints[i]);
             }
         }
 

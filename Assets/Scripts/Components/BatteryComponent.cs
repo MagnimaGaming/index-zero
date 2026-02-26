@@ -21,6 +21,11 @@ public class BatteryComponent : CircuitComponent
     {
         solver = FindAnyObjectByType<CircuitSolver>();
 
+        if (!isPowerOn)
+        {
+            isPowerOn = true;
+        }
+
         if(simpleInteractable != null)
         {
             simpleInteractable.selectEntered.AddListener(OnSwitchFlip);
