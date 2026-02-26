@@ -29,6 +29,7 @@ public class PlugSnappable : MonoBehaviour
         {
             isSnapped = false;
             xrGrab.interactionLayers = defaultLayerMask;
+            xrGrab.enabled = true;
             leg.ClearSnap();
 
             if(occupiedTarget != null)
@@ -61,7 +62,7 @@ public class PlugSnappable : MonoBehaviour
             xrGrab.interactionLayers = placedLayerMask;
 
             parentWire.OnPlugSnapped();
-
+            xrGrab.enabled = false;
         }
         else if(snapTargetManager.TryGetSnapPoint(leg.transform.position, out Vector3 snapPoint2, out SnapTarget snapTarget))
         {
@@ -72,6 +73,7 @@ public class PlugSnappable : MonoBehaviour
             xrGrab.interactionLayers = placedLayerMask;
 
             parentWire.OnPlugSnapped();
+            xrGrab.enabled = false;
         }
     }
 
