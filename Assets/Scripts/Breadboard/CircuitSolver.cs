@@ -156,7 +156,7 @@ public class CircuitSolver : MonoBehaviour
         }
 
         if (!batterOn) return;
-        if (lowVoltage < 0 && highVoltage < 0) return;
+        if (lowVoltage < 0 || highVoltage < 0) return;
 
         float availableVoltage = highVoltage - lowVoltage;
         if (availableVoltage <= 0f) return;
@@ -174,9 +174,7 @@ public class CircuitSolver : MonoBehaviour
             return;
         }
 
-
         solvedCurrent = voltageAcrossResister / totalResistance;
-
 
         foreach (var kvp in nodeMap)
         {
@@ -194,8 +192,8 @@ public class CircuitSolver : MonoBehaviour
         {
             if (comp is JumperWireComponent wireComponent)
             {
-                if (wireComponent.legs[0].node == null) return;
-                if (wireComponent.legs[1].node == null) return;
+                if (wireComponent.legs[0].node == null) continue;
+                if (wireComponent.legs[1].node == null) continue;
 
                 Node nodeA = wireComponent.legs[0].node;
                 Node nodeB = wireComponent.legs[1].node;

@@ -34,8 +34,6 @@ public class PlugSnappable : MonoBehaviour
                 occupiedTarget.isOccupied = false;
                 occupiedTarget = null;
             }
-
-
             parentWire.OnPlugUnsnapped();
         }
     }
@@ -61,12 +59,8 @@ public class PlugSnappable : MonoBehaviour
 
             parentWire.OnPlugSnapped();
 
-            yield return null;
         }
-
-
-
-        if(snapTargetManager.TryGetSnapPoint(leg.transform.position, out Vector3 snapPoint2, out SnapTarget snapTarget))
+        else if(snapTargetManager.TryGetSnapPoint(leg.transform.position, out Vector3 snapPoint2, out SnapTarget snapTarget))
         {
             leg.transform.position = snapPoint2;
             leg.snappedRegion = null;
