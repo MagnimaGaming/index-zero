@@ -109,6 +109,7 @@ public class SnappableComponent : MonoBehaviour
         }
 
         Vector3 midPoint = (pendingSnapPoints[0] + pendingSnapPoints[1]) / 2f;
+        midPoint += Vector3.up * 0.03f;
         transform.position = midPoint;
         //transform.localRotation = Quaternion.identity;
 
