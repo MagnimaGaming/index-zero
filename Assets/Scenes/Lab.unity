@@ -2602,7 +2602,7 @@ MonoBehaviour:
   legs:
   - {fileID: 991224860}
   - {fileID: 283567549}
-  isPowerOn: 0
+  isPowerOn: 1
   simpleInteractable: {fileID: 0}
   solver: {fileID: 1777786868}
   powerLight: {fileID: 330742915}

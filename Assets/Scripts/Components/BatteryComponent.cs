@@ -21,12 +21,10 @@ public class BatteryComponent : CircuitComponent
     {
         solver = FindAnyObjectByType<CircuitSolver>();
 
-        if (!isPowerOn)
-        {
-            isPowerOn = true;
-        }
+        isPowerOn = true;
+        OnPlaced();
 
-        if(simpleInteractable != null)
+        if (simpleInteractable != null)
         {
             simpleInteractable.selectEntered.AddListener(OnSwitchFlip);
         }
@@ -68,5 +66,12 @@ public class BatteryComponent : CircuitComponent
     {
         isPowerOn = true;
         ApplyVisuals();
+        
+        foreach(ComponentLeg leg in legs)
+        {
+            leg.isSnapped = true;
+        }
+
+        solver.RegisterComponent(this);
     }
 }

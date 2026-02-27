@@ -238,7 +238,11 @@ public class CircuitSolver : MonoBehaviour
                     Debug.Log($"Battery - node voltage: {lowVoltage}V");
                 }
                 else Debug.Log("Battery - leg node is NULL");
+
+                Debug.Log($"Battery legs[0].node = {battery.legs[0]?.node?.nodeId}, legs[1].node = {battery.legs[1]?.node?.nodeId}");
+                Debug.Log($"Battery legs[0].isSnapped = {battery.legs[0]?.isSnapped}, snapTarget = {battery.legs[0]?.snapTarget?.nodeKey}");
             }
+
         }
 
         if (!batteryOn)
