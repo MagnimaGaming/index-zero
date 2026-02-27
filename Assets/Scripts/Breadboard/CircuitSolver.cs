@@ -284,6 +284,9 @@ public class CircuitSolver : MonoBehaviour
         solvedCurrent = voltageAcrossResistor / totalResistance;
         Debug.Log($"SUCCESS: solvedCurrent = {solvedCurrent}A");
 
+        nodeMap["battery_positive"].voltage = 5f;
+        nodeMap["battery_negative"].voltage = 0f;
+
         foreach (var kvp in nodeMap)
         {
             if (kvp.Value.voltage == -1f)
